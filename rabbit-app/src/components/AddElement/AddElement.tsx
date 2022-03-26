@@ -3,10 +3,11 @@ import { ToDoType } from "../../types/Types";
 import styles from "./AddElement.module.css";
 
 type Prop = {
+	getList: ToDoType[];
 	setList: React.Dispatch<React.SetStateAction<ToDoType[]>>;
 };
 
-const AddElement: React.FC<Prop> = ({ setList }) => {
+const AddElement: React.FC<Prop> = ({ getList, setList }) => {
 	const [title, setTitle] = useState("");
 	const handleClick = (title: string) => {
 		if (title === "") {
@@ -15,6 +16,7 @@ const AddElement: React.FC<Prop> = ({ setList }) => {
 		setList((list) => [...list, { title: title, state: false }]);
 		return setTitle("");
 	};
+	const sumAllTodo = (list: ToDoType[]) => {};
 
 	return (
 		<div className={styles.addComponent}>
@@ -25,8 +27,15 @@ const AddElement: React.FC<Prop> = ({ setList }) => {
 				onChange={(e) => setTitle(e.target.value)}
 				value={title}
 			/>
-			<button className={styles.addButton} onClick={() => handleClick(title)}>
+			<button
+				className={`${styles.btn} ${styles.add}`}
+				onClick={() => handleClick(title)}>
 				Add
+			</button>
+			<button
+				className={`${styles.btn} ${styles.sum}`}
+				onClick={() => sumAllTodo(getList)}>
+				Sum
 			</button>
 		</div>
 	);
