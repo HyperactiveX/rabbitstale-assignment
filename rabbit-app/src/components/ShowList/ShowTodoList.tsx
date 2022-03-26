@@ -30,14 +30,15 @@ const ShowTodoList: React.FC<Prop> = ({ position, element, setList }) => {
 					className={
 						element.state ? `${styles.list} ${styles.active}` : styles.list
 					}
-					onClick={() => handleState()}
 					style={{
 						background: position % 2 === 0 ? "#f9f9f9" : "#E7E9EB",
 					}}>
 					<div className={styles.icon}>
 						<i className='fa-solid fa-check'></i>
 					</div>
-					<span className={styles.content}>{element.title}</span>
+					<span className={styles.content} onClick={() => handleState()}>
+						{element.title}
+					</span>
 					<span
 						className={styles.closeBtn}
 						onClick={() => handleDelete(position)}>
