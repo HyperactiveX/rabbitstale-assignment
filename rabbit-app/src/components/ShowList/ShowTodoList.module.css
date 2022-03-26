@@ -1,0 +1,44 @@
+.list {
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.5rem;
+	transition: all 0.2s ease-in-out;
+}
+.list:hover {
+	background: #dddddd !important;
+}
+.content,
+.closeBtn {
+	padding: 1.5rem;
+}
+.content {
+	width: 100%;
+	overflow: auto;
+	padding-left: 0;
+}
+.closeBtn {
+	width: 30px;
+	text-align: center;
+}
+.closeBtn:hover {
+	cursor: pointer;
+	background-color: cadetblue;
+	color: #fff;
+}
+.icon {
+	padding: 1.5rem;
+	opacity: 0;
+}
+.active {
+	color: #fff;
+	background-color: #888 !important;
+}
+.active:hover {
+	background-color: #888 !important;
+}
+.active .content {
+	text-decoration: line-through solid #fff;
+}
+.active .icon {
+	opacity: 100%;
+}
