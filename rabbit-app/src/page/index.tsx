@@ -21,15 +21,16 @@ function TodoList() {
 			);
 		});
 	};
-	useEffect(() => {
-		renderTodoList();
-	}, [toDoList]);
+
+	// useEffect(() => {
+	// 	renderTodoList();
+	// }, [toDoList]);
 
 	return (
 		<div className={styles.page}>
 			<div className={styles.addTodoList}>
 				<h1>My Todo List</h1>
-				<AddElement setList={setToDoList} />
+				<AddElement setList={setToDoList} getList={toDoList} />
 			</div>
 			<div className={styles.showTodoList}>{renderTodoList()}</div>
 		</div>
