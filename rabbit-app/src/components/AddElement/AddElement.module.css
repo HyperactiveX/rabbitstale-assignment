@@ -1,0 +1,15 @@
+.addComponent {
+	display: flex;
+	height: 3rem;
+}
+.inputField,
+.addButton {
+	font-size: 1.25rem;
+}
+.inputField {
+	width: 700px;
+	padding: 0.5rem;
+}
+.addButton {
+	padding: 0.5rem 3rem;
+}
