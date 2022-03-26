@@ -1,5 +1,6 @@
 .page {
 	width: 100vw;
+	min-height: 820px;
 	height: 100vh;
 }
 .addTodoList {
@@ -25,5 +26,8 @@
 .showTodoList {
 	height: 70%;
 	width: 100%;
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
 	background-color: lightgrey;
 }
