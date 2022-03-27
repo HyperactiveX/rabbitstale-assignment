@@ -29,16 +29,16 @@
 	padding: 1.5rem;
 	opacity: 0;
 }
-.active {
+.completed {
 	color: #fff;
 	background-color: #888 !important;
 }
-.active:hover {
+.completed:hover {
 	background-color: #888 !important;
 }
-.active .content {
+.completed .content {
 	text-decoration: line-through solid #fff;
 }
-.active .icon {
+.completed .icon {
 	opacity: 100%;
 }
