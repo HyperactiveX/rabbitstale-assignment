@@ -25,7 +25,7 @@ const AddElement: React.FC<Prop> = ({ getList, setList }) => {
 	const sumAllNumber = (list: ToDoType[]) => {
 		return list
 			.map((element, index) => {
-				let title = parseInt(element.title);
+				let title = parseFloat(element.title);
 				return isNaN(title) ? 0 : title;
 			})
 			.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
