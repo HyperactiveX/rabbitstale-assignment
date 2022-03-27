@@ -4,12 +4,14 @@
 }
 .formContainer {
 	display: flex;
+	justify-content: space-between;
 }
 .inputField,
 .addButton {
 	font-size: 1.25rem;
 }
 .inputField {
+	width: 100%;
 	padding: 0.5rem;
 }
 .btnContainer {
@@ -27,6 +29,9 @@
 @media only screen and (max-width: 1024px) {
 	.formContainer {
 		flex-direction: column;
+	}
+	.inputField {
+		width: auto;
 	}
 	.btnContainer {
 		padding-top: 1rem;
