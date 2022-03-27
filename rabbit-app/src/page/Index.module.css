@@ -4,13 +4,21 @@
 	height: 100vh;
 }
 .addTodoList {
-	height: 30%;
+	min-height: 30%;
+	height: fit-content;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	background-color: cadetblue;
+}
+
+.addContainer {
+	width: 70%;
+}
+.title {
+	text-align: center;
 }
 
 .input {
@@ -26,4 +34,15 @@
 	display: flex;
 	flex-direction: column;
 	background-color: lightgrey;
+}
+
+@media only screen and (max-width: 1024px) {
+	.addContainer {
+		width: 80%;
+	}
+}
+@media only screen and (max-width: 768px) {
+	.addContainer {
+		width: 90%;
+	}
 }

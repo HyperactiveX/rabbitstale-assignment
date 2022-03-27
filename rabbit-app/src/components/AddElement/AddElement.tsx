@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { SumResultType, ToDoType } from "../../types/Types";
 import styles from "./AddElement.module.css";
 
 type Prop = {
 	getList: ToDoType[];
 	setList: React.Dispatch<React.SetStateAction<ToDoType[]>>;
-	setSum: React.Dispatch<React.SetStateAction<SumResultType>>;
 };
 
-const AddElement: React.FC<Prop> = ({ getList, setList, setSum }) => {
+const AddElement: React.FC<Prop> = ({ getList, setList }) => {
 	const [title, setTitle] = useState<string>("");
+	const [sumResult, setSumResult] = useState<SumResultType>({
+		number: 0,
+		string: "",
+	});
 
 	const handleSubmit = (title: string) => {
 		if (title === "") {
@@ -37,12 +40,13 @@ const AddElement: React.FC<Prop> = ({ getList, setList, setSum }) => {
 			.reduce((prev, curr) => prev + curr, "");
 	};
 	const sumAll = (list: ToDoType[]) => {
-		setSum({ number: sumAllNumber(list), string: concatAllString(list) });
+		setSumResult({ number: sumAllNumber(list), string: concatAllString(list) });
 	};
 
 	return (
 		<div className={styles.addComponent}>
 			<form
+				id='addForm'
 				className={styles.formContainer}
 				onSubmit={(e) => {
 					e.preventDefault();
@@ -55,15 +59,27 @@ const AddElement: React.FC<Prop> = ({ getList, setList, setSum }) => {
 					onChange={(e) => setTitle(e.target.value)}
 					value={title}
 				/>
-				<button className={`${styles.btn} ${styles.add}`} type='submit'>
-					Add
-				</button>
+				<div className={styles.btnContainer}>
+					<button className={`${styles.btn} ${styles.add}`} type='submit'>
+						Add
+					</button>
+					<button
+						className={`${styles.btn} ${styles.sum}`}
+						type='button'
+						onClick={() => sumAll(getList)}>
+						Sum
+					</button>
+				</div>
 			</form>
-			<button
-				className={`${styles.btn} ${styles.sum}`}
-				onClick={() => sumAll(getList)}>
-				Sum
-			</button>
+			<div className={styles.showResult}>
+				<p className={styles.showNumber}>
+					Total Sum of Number: {sumResult.number}
+				</p>
+				<p className={styles.showText}>
+					Concat of All String:{" "}
+					{sumResult.string === "" ? '" "' : sumResult.string}
+				</p>
+			</div>
 		</div>
 	);
 };

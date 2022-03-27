@@ -1,6 +1,6 @@
 .addComponent {
 	display: flex;
-	height: 3rem;
+	flex-direction: column;
 }
 .formContainer {
 	display: flex;
@@ -10,13 +10,29 @@
 	font-size: 1.25rem;
 }
 .inputField {
-	width: 700px;
 	padding: 0.5rem;
+}
+.btnContainer {
+	display: flex;
 }
 .btn {
 	padding: 0.5rem 3rem;
 }
+.showText,
+.showNumber {
+	width: 100%;
+	overflow: auto;
+}
 
-.add {
-	height: 100%;
+@media only screen and (max-width: 1024px) {
+	.formContainer {
+		flex-direction: column;
+	}
+	.btnContainer {
+		padding-top: 1rem;
+		justify-content: space-between;
+	}
+	.btn {
+		width: 49%;
+	}
 }
