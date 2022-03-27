@@ -1,34 +1,30 @@
 import React from "react";
-import { ToDoType } from "../../types/Types";
 import styles from "./ShowTodoList.module.css";
 
-type Prop = {
+type TodoList = {
+	title: string;
 	position: number;
-	element: ToDoType;
-	setList: React.Dispatch<React.SetStateAction<ToDoType[]>>;
+	completed: boolean;
+	onDelete: CallableFunction;
+	onChange: CallableFunction;
 };
 
-const ShowTodoList: React.FC<Prop> = ({ position, element, setList }) => {
-	const handleDelete = (position: number) => {
-		return setList((list) => list.filter((items, index) => index !== position));
-	};
-
-	const handleState = () => {
-		setList((list) =>
-			list.map((element, key) => {
-				return key !== position
-					? element
-					: { title: element.title, state: !element.state };
-			})
-		);
-	};
+const ShowTodoList: React.FC<TodoList> = ({
+	title,
+	completed,
+	position,
+	onDelete,
+	onChange,
+}) => {
+	const handleDelete = () => onDelete;
+	const handleState = () => onChange;
 
 	return (
 		<>
-			{element.title !== "" && (
+			{title !== "" && (
 				<div
 					className={
-						element.state ? `${styles.list} ${styles.active}` : styles.list
+						completed ? `${styles.list} ${styles.active}` : styles.list
 					}
 					style={{
 						background: position % 2 === 0 ? "#f9f9f9" : "#E7E9EB",
@@ -37,11 +33,9 @@ const ShowTodoList: React.FC<Prop> = ({ position, element, setList }) => {
 						<i className='fa-solid fa-check'></i>
 					</div>
 					<span className={styles.content} onClick={() => handleState()}>
-						{element.title}
+						{title}
 					</span>
-					<span
-						className={styles.closeBtn}
-						onClick={() => handleDelete(position)}>
+					<span className={styles.closeBtn} onClick={() => handleDelete()}>
 						×
 					</span>
 				</div>
@@ -49,5 +43,4 @@ const ShowTodoList: React.FC<Prop> = ({ position, element, setList }) => {
 		</>
 	);
 };
-
 export default ShowTodoList;

@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./Index.module.css";
 import AddElement from "../components/AddElement/AddElement";
 import ShowTodoList from "../components/ShowList/ShowTodoList";
-import { ToDoType } from "../types/Types";
+import { TodoStoreImpl } from "./TodoStorage";
+import { observer } from "mobx-react";
 
-function TodoList() {
-	const [toDoList, setToDoList] = useState<ToDoType[]>([
-		{ title: "", state: false },
-	]);
+interface TodoProp {
+	todoStore: TodoStoreImpl;
+}
 
+export const TodoList: React.FC<TodoProp> = observer(({ todoStore }) => {
 	const renderTodoList = () => {
-		return toDoList.map((element, key) => {
+		return todoStore.todoList.map((todo, key) => {
 			return (
 				<ShowTodoList
 					key={key}
 					position={key}
-					element={element}
-					setList={setToDoList}
+					title={todo.title}
+					completed={todo.completed}
+					onDelete={() => todoStore.deleteTodo(key)}
+					onChange={() => todoStore.changeStatus(key)}
 				/>
 			);
 		});
@@ -27,12 +30,10 @@ function TodoList() {
 			<div className={styles.addTodoList}>
 				<div className={styles.addContainer}>
 					<h1 className={styles.title}>My Todo List</h1>
-					<AddElement setList={setToDoList} getList={toDoList} />
+					<AddElement todoStore={todoStore} />
 				</div>
 			</div>
 			<div className={styles.showTodoList}>{renderTodoList()}</div>
 		</div>
 	);
-}
-
-export default TodoList;
+});
