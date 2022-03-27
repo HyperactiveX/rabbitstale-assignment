@@ -2,8 +2,19 @@ import { action, makeObservable, observable } from "mobx";
 
 
 interface TodoItem {
+    id: string,
     title: string;
     completed: boolean;
+}
+
+const UUID = () => {
+    let dt = new Date().getTime();
+    let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (dt + Math.random()*16)%16 | 0;
+        dt = Math.floor(dt/16);
+        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    });
+    return uuid;
 }
 
 export class TodoStoreImpl {
@@ -14,7 +25,7 @@ export class TodoStoreImpl {
             todoList: observable,
             addTodo: action,
             getTodo: observable,
-            deleteTodo: observable,
+            deleteTodo: action,
             changeStatus: action,
             concatAllString: observable,
             sumAll: observable
@@ -23,6 +34,7 @@ export class TodoStoreImpl {
 
     addTodo(title: string) {
         const item: TodoItem = {
+            id: UUID(),
             title: title,
             completed: false
         }
@@ -32,15 +44,15 @@ export class TodoStoreImpl {
     getTodo() {
         return this.todoList
     }
-    deleteTodo(position: number) {
-        this.todoList.filter((items, index) => index !== position)
+    deleteTodo(id: string) {
+        this.todoList = [...this.todoList.filter((items, index) => items.id !== id)]
     }
-    changeStatus(position: number) {
-        this.todoList.map((element, key) => {
-            return key !== position
+    changeStatus(id: string) {
+        this.todoList = [...this.todoList.map((element, key) => {
+            return element.id !== id
                 ? element
-                : { title: element.title, completed: !element.completed };
-        })
+                : {id: element.id, title: element.title, completed: !element.completed };
+        })]
     }
     sumAllNumber() {
         let result = this.todoList
