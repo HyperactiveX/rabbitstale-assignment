@@ -18,8 +18,8 @@ export const TodoList: React.FC<TodoProp> = observer(({ todoStore }) => {
 					position={key}
 					title={todo.title}
 					completed={todo.completed}
-					onDelete={() => todoStore.deleteTodo(key)}
-					onChange={() => todoStore.changeStatus(key)}
+					onDelete={() => todoStore.deleteTodo(todo.id)}
+					onChange={() => todoStore.changeStatus(todo.id)}
 				/>
 			);
 		});
